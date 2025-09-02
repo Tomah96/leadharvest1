@@ -1,6 +1,6 @@
 const EmailSourceDetector = require('../parsers/emailSourceDetector');
 const ZillowParser = require('../parsers/zillowParser');
-const RealtorParser = require('../parsers/realtorParser');
+const RealtorParser = require('../parsers/realtorParserEnhanced');
 const ApartmentsParser = require('../parsers/apartmentsParser');
 const RentMarketplaceParser = require('../parsers/rentMarketplaceParser');
 // Lazy load LeadService to avoid circular dependency

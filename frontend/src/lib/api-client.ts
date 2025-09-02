@@ -245,7 +245,7 @@ export const api = {
             data?: Partial<Lead>;
             error?: string;
           }>
-        }>("/gmail/test/import", { labelId, count }),
+        }>("/gmail/test/import", { labelId, count }, { timeout: 60000 }),
       parseEmail: (messageId: string) => 
         apiClient.get<{ 
           success: boolean; 

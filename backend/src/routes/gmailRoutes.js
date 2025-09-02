@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const GmailController = require('../controllers/gmailController');
+const GmailControllerOptimized = require('../controllers/gmailControllerOptimized');
 const { authenticate } = require('../middleware/auth');
 
 // Gmail OAuth routes
@@ -30,7 +31,7 @@ router.post('/import-emails', authenticate, GmailController.importEmails);
 
 // Test endpoints (no database required)
 router.get('/test/labels', GmailController.testSearchLabels);
-router.post('/test/import', GmailController.testImportEmails);
+router.post('/test/import', GmailControllerOptimized.testImportEmailsBatch); // Use optimized batch processor
 router.get('/test/parse/:messageId', GmailController.testParseEmail);
 router.post('/test/set-tokens', GmailController.testSetTokens);
 

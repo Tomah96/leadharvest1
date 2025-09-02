@@ -282,7 +282,9 @@ class LeadService {
       // Create or update the lead
       const result = await this.createOrUpdateLead(leadData);
 
-      // Create initial inquiry conversation if it's a new lead with inquiry text
+      // TEMPORARILY DISABLED: Conversation creation during import
+      // Re-enable after running the fix-conversations-table.sql in Supabase
+      /*
       if (result.isNew && (emailData.notes || emailData.message)) {
         try {
           const ConversationService = require('./conversationService');
@@ -297,6 +299,8 @@ class LeadService {
           // Don't fail the lead creation if conversation fails
         }
       }
+      */
+      console.log('⚠️ Conversation creation disabled - run fix-conversations-table.sql in Supabase');
 
       return result;
     } catch (error) {
