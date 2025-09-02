@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "postgres": {
+      "command": "node",
+      "args": ["./node_modules/mcp-postgres-server/dist/index.js"],
+      "env": {
+        "POSTGRES_CONNECTION_STRING": "postgresql://postgres:SupaBase6991Rules!!!@db.zobnidmljwwrthebnizf.supabase.co:5432/postgres"
+      }
+    }
+  }
+}

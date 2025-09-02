@@ -1,74 +1,177 @@
-# LeadHarvest CRM - Daily Assignments
+# Daily Assignments - LeadHarvest CRM
 
-## Date: 2025-07-16
+## 🔴 CURRENT ASSIGNMENTS - 2025-01-08 (Updated 17:30)
 
-### Backend Specialist Claude - Day 1 Tasks
+### Claude 2 (Backend) - NEW TASK
+**Task**: Fix Lead Data Parsing
+**File**: `/docs/tasks/backend-fix-lead-parsing.md`
+**Priority**: High
+**Status**: Assigned
+**Start Time**: Pending
+**Details**:
+- Fix name extraction from email content
+- RentMarketplace parser is broken (extracting wrong names)
+- Update all 4 email parsers
+- Re-parse existing leads with corrections
 
-**Priority: High**
-1. **Initialize Backend Project**
-   - Create Node.js project in `/backend` directory
-   - Install core dependencies: express, cors, dotenv, pg (for Supabase)
-   - Set up basic Express server structure with middleware
-   - Create `server.js` with health check endpoint
-
-2. **Supabase Database Connection**
-   - Set up database connection using existing credentials in .env
-   - Create database service module for connection pooling
-   - Test connection with simple query
-
-3. **Project Structure Setup**
-   - Create folder structure: routes/, services/, middleware/, utils/
-   - Set up environment variable configuration
-   - Create basic error handling middleware
-
-4. **Authentication Foundation**
-   - Install bcryptjs and jsonwebtoken
-   - Create auth middleware skeleton
-   - Prepare for session-based authentication
-
-**Update progress in docs/progress-reports.md after each major task**
+### Claude 3 (Frontend) - NEW TASK
+**Task**: Enhance Lead Card Display
+**File**: `/docs/tasks/frontend-enhance-lead-card.md`
+**Priority**: High
+**Status**: Assigned (wait for Backend)
+**Start Time**: After Backend completes
+**Details**:
+- Improve empty state messages (no more "Not provided")
+- Add data quality indicators
+- Show profile completeness percentage
+- Better visual hierarchy and formatting
 
 ---
 
-### Frontend Specialist Claude - Day 1 Tasks
+## ✅ COMPLETED EARLIER TODAY - 2025-01-08
 
-**Priority: High**
-1. **Initialize Frontend Project**
-   - Create Next.js 14 app in `/frontend` directory using App Router
-   - Set up Tailwind CSS with custom configuration
-   - Configure TypeScript support
-   - Create basic folder structure
+### Claude 2 (Backend)
+**Task**: Verify/Enhance Lead Details API
+**File**: `/docs/tasks/backend-lead-details-api.md`
+**Priority**: High
+**Status**: Assigned
+**Start Time**: Pending
+**Details**: 
+- Ensure GET /api/leads/:id returns all required fields
+- Probably already exists - verify first
+- Test with real lead IDs from database
 
-2. **Layout and Navigation**
-   - Create root layout with sidebar navigation component
-   - Design sidebar with: Leads, Conversations, Settings sections
-   - Implement responsive design (mobile-friendly)
-   - Use Lucide React for icons
+### Claude 3 (Frontend)  
+**Task**: Implement Lead Details Page
+**File**: `/docs/tasks/frontend-lead-details-page.md`
+**Priority**: High
+**Status**: Assigned
+**Start Time**: Pending
+**Details**: 
+- Ensure GET /api/leads/:id returns all required fields
+- Probably already exists - verify first
+- Test with real lead IDs from database
 
-3. **Leads Page Foundation**
-   - Create `/leads` route and page component
-   - Build LeadCard component structure (placeholder data)
-   - Implement basic grid layout for lead cards
-   - Add search bar and filter UI components
-
-4. **API Client Setup**
-   - Create API client utility for backend communication
-   - Set up axios with base configuration
-   - Prepare for authentication headers
-
-**Update progress in docs/progress-reports.md after each major task**
+### Coordination Requirements
+1. Backend (Claude 2) should verify endpoint first
+2. Backend communicates format to Frontend via AGENT-COMMUNICATION-LOG.md
+3. Frontend (Claude 3) implements UI based on API response
+4. Both update ACTIVE-WORK-LOG.md with progress
+5. Mark complete in progress-reports.md when done
 
 ---
 
-## Coordination Notes
-- Backend should prioritize health check endpoint so Frontend can test connectivity
-- Both teams should commit to feature branches: `backend/initial-setup` and `frontend/initial-setup`
-- API contracts will be defined tomorrow once basic structure is in place
-- Focus on foundation - don't implement business logic yet
+## ✅ COMPLETED TODAY - 2025-01-08
 
-## End of Day Checklist
-- [ ] Backend: Express server running on port 3001
-- [ ] Backend: Supabase connection verified
-- [ ] Frontend: Next.js app running on port 3000
-- [ ] Frontend: Basic navigation and leads page visible
-- [ ] Both: Progress updated in documentation
+### Claude 1 (Backend) - Session 1
+**Completed Tasks**:
+1. Fixed Supabase initialization issue (4 hours)
+   - Changed import path in leadModel.js
+   - Result: Gmail import now working
+2. Created comprehensive documentation system
+   - DEBUGGING-PRINCIPLES.md
+   - KNOWLEDGE-CONTINUITY-SYSTEM.md
+   - Lessons learned documentation
+3. Consolidated 60+ existing docs into indexed system
+
+---
+
+## 📅 PREVIOUS ASSIGNMENTS
+
+## Backend Team - Day 1 Tasks
+
+### Priority 1: Project Setup
+1. **Initialize Node.js Project**
+   - Create package.json with appropriate metadata
+   - Set up npm scripts for development and production
+   - Configure Node.js version requirements
+
+2. **Set Up Express Server**
+   - Install Express and required middleware
+   - Create basic server structure (app.js/server.js)
+   - Configure port 3001 for backend
+   - Implement health check endpoint: `GET /api/health`
+
+3. **Configure Development Environment**
+   - Set up nodemon for auto-reloading
+   - Create .env.example file with required variables
+   - Configure environment variable loading (dotenv)
+   - Set up proper project structure:
+     ```
+     backend/
+     ├── src/
+     │   ├── routes/
+     │   ├── controllers/
+     │   ├── middleware/
+     │   ├── models/
+     │   └── utils/
+     ├── app.js
+     ├── server.js
+     └── package.json
+     ```
+
+### Priority 2: Database Setup
+1. **Supabase Integration**
+   - Install Supabase client library
+   - Create database connection module
+   - Test connection with environment variables
+   - Create initial migration for leads table:
+     ```sql
+     CREATE TABLE leads (
+       id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+       first_name VARCHAR(255),
+       last_name VARCHAR(255),
+       phone VARCHAR(20) UNIQUE NOT NULL,
+       email VARCHAR(255),
+       property_address TEXT,
+       inquiry_date TIMESTAMP,
+       credit_score INTEGER,
+       income DECIMAL(10, 2),
+       move_in_date DATE,
+       occupants INTEGER,
+       pets TEXT,
+       lease_length INTEGER,
+       source VARCHAR(50),
+       status VARCHAR(50) DEFAULT 'new',
+       gmail_message_id VARCHAR(255),
+       missing_info TEXT[],
+       parsing_errors TEXT[],
+       created_at TIMESTAMP DEFAULT NOW(),
+       updated_at TIMESTAMP DEFAULT NOW()
+     );
+     ```
+
+### Priority 3: Basic API Structure
+1. **Authentication Middleware**
+   - Set up JWT authentication
+   - Create session handling
+   - Implement auth middleware for protected routes
+
+2. **Error Handling**
+   - Create global error handler middleware
+   - Set up proper error responses
+   - Implement request validation middleware
+
+### Deliverables for Day 1
+- Working Express server on port 3001
+- Connected Supabase database
+- Health check endpoint returning `{ status: "ok", timestamp: "<current-time>" }`
+- Basic project structure ready for feature development
+- Environment configuration complete
+
+### Notes
+- Focus on reliability over complexity ("Toyota not BMW" approach)
+- Ensure all database queries use prepared statements
+- Document any blockers in progress-reports.md
+- Update progress after each completed task
+- Add lessons learned to knowledge-base.md
+- Track any shortcuts taken in tech-debt-tracker.md
+- Update CHANGELOG.md with your daily accomplishments
+
+---
+
+## Frontend Team - Day 1 Tasks
+(To be assigned by Orchestrator)
+
+## Integration Team - Day 1 Tasks
+(To be assigned by Orchestrator)
